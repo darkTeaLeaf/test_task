@@ -1,4 +1,4 @@
-
+package task3;
 
 public class MathBox extends ObjectBox {
 
