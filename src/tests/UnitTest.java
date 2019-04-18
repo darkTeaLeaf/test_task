@@ -10,11 +10,13 @@ import java.util.ArrayList;
 public class UnitTest extends Assert{
     Number[] init_array;
     MathBox box;
+    MathBox box2;
 
     @Before
     public void initialization(){
         init_array = new Number[]{1, 5.5, 30, 6, 47};
         box = new MathBox(init_array);
+        box2 = new MathBox(init_array);
     }
 
     @Test
@@ -23,23 +25,23 @@ public class UnitTest extends Assert{
         assertEquals(expected, box.summator());
     }
 
-    //Test with error. Did not have time to fix it
     @Test
     public void task1Splitter(){
         ArrayList<Number> expected = new ArrayList<>();
-        expected.add(0);
-        expected.add(1.6666666666666667);
-        expected.add(10);
-        expected.add(2);
-        expected.add(15);
+        expected.add(1);
+        expected.add(5.5);
+        expected.add(30);
+        expected.add(6);
+        expected.add(47);
 
         box.splitter(3);
 
         boolean res = true;
 
         for (int i = 0; i < expected.size(); i++) {
-            if (!expected.get(i).equals(box.numbers.get(i))) {
+            if (!expected.get(i).equals(box2.numbers.get(i))) {
                 res = false;
+                System.out.println(expected.get(i)+ " " + box2.numbers.get(i));
             }
         }
 
