@@ -1,8 +1,10 @@
+package task1;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MathBox {
-    ArrayList<Number> numbers;
+    private ArrayList<Number> numbers;
 
     MathBox(Number[] number) {
         this.numbers = new ArrayList<>();
