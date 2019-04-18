@@ -1,7 +1,7 @@
 public class Main {
 
     public static void main(String[] args) {
-        Number[] array = {1, 5,5, 30, 6, 47};
+        Number[] array = {1, 5.5, 30, 6, 47};
         MathBox box = new MathBox(array);
 
         System.out.println(box.toString());

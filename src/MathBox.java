@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 
 public class MathBox {
     ArrayList<Number> numbers;
@@ -11,12 +12,15 @@ public class MathBox {
     }
 
     public Number summator() {
-        int sum = 0;
+        Number sum = 0;
 
-        for (Number number : numbers) {
-            sum += number.intValue();
+        for (Number number : this.numbers) {
+            if (sum instanceof Double || number instanceof Double) {
+                sum = sum.doubleValue() + number.doubleValue();
+            } else {
+                sum = sum.longValue() + number.longValue();
+            }
         }
-
         return sum;
     }
 
@@ -25,11 +29,20 @@ public class MathBox {
             int previous = this.numbers.get(i).intValue();
             this.numbers.set(i, (int)(previous / divider));
         }
+        for (int i = 0; i < this.numbers.size(); i++) {
+            if (this.numbers.get(i) instanceof Double || this.numbers.get(i) instanceof Float) {
+                int previous = this.numbers.get(i).intValue();
+                this.numbers.set(i, previous / divider);
+            } else {
+                long previous = this.numbers.get(i).longValue();
+                this.numbers.set(i, (long)(previous / divider));
+            }
+        }
     }
 
-    public void delete(int value){
+    public void delete(Integer value){
         for (int i = 0; i < this.numbers.size(); i++) {
-            if(value == this.numbers.get(i).intValue()){
+            if(value.equals(this.numbers.get(i))){
                 this.numbers.remove(i);
                 break;
             }
