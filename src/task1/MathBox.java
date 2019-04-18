@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MathBox {
-    private ArrayList<Number> numbers;
+    public ArrayList<Number> numbers;
 
-    MathBox(Number[] number) {
+    public MathBox(Number[] number) {
         this.numbers = new ArrayList<>();
 
         this.numbers.addAll(Arrays.asList(number));
