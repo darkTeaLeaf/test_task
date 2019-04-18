@@ -1,9 +1,16 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ObjectBox {
-    private ArrayList<Object> objects;
+    ArrayList<Object> objects;
 
-    public void addObject(Object object) {
+    ObjectBox(Object[] objects) {
+        this.objects = new ArrayList<>();
+
+        this.objects.addAll(Arrays.asList(objects));
+    }
+
+    public void addObject(Object object) throws Exception {
         this.objects.add(object);
     }
 
@@ -11,7 +18,8 @@ public class ObjectBox {
         this.objects.remove(object);
     }
 
-    public String dump() {
+    @Override
+    public String toString() {
         String string = "[" + this.objects.get(0).toString();
 
         for (int i = 1; i < this.objects.size(); i++) {

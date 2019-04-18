@@ -1,19 +1,16 @@
-import java.util.ArrayList;
-import java.util.Arrays;
 
-public class MathBox {
-    ArrayList<Number> numbers;
+
+public class MathBox extends ObjectBox {
 
     MathBox(Number[] number) {
-        this.numbers = new ArrayList<>();
-
-        this.numbers.addAll(Arrays.asList(number));
+        super(number);
     }
 
     public Number summator() {
         Number sum = 0;
 
-        for (Number number : this.numbers) {
+        for (Object object : super.objects) {
+            Number number = (Number) object;
             if (sum instanceof Double || number instanceof Double) {
                 sum = sum.doubleValue() + number.doubleValue();
             } else {
@@ -24,42 +21,37 @@ public class MathBox {
     }
 
     public void splitter(double divider) {
-        for (int i = 0; i < this.numbers.size(); i++) {
-            if (this.numbers.get(i) instanceof Double || this.numbers.get(i) instanceof Float) {
-                int previous = this.numbers.get(i).intValue();
-                this.numbers.set(i, (double)previous / divider);
+        for (int i = 0; i < super.objects.size(); i++) {
+            Number number = (Number) super.objects.get(i);
+            if (number instanceof Double || number instanceof Float) {
+                int previous = number.intValue();
+                super.objects.set(i, (double)previous / divider);
             } else {
-                long previous = this.numbers.get(i).longValue();
-                this.numbers.set(i, (long) (previous / divider));
+                long previous = number.longValue();
+                super.objects.set(i, (long) (previous / divider));
             }
         }
     }
 
-    public void delete(Integer value) {
-        this.numbers.remove(value);
-    }
-
     @Override
-    public String toString() {
-        String object = "[" + this.numbers.get(0);
-
-        for (int i = 1; i < this.numbers.size(); i++) {
-            object += ", " + this.numbers.get(i);
+    public void addObject(Object object) throws Exception {
+        if(object instanceof Number){
+            super.addObject(object);
         }
-
-        object += "]";
-
-        return object;
+        else {
+            throw new Exception("Argument is not instance of class Number");
+        }
     }
 
     @Override
     public int hashCode() {
-        if (this.numbers == null)
+        if (super.objects == null)
             return 0;
 
         int result = 1;
-        for (Number element : this.numbers) {
-            int elementHash = (int) (element.longValue() ^ (element.longValue() >>> 32));
+        for (Object object : super.objects) {
+            Number number = (Number) object;
+            int elementHash = (int) (number.longValue() ^ (number.longValue() >>> 32));
             result = 31 * result + elementHash;
         }
 
@@ -72,14 +64,14 @@ public class MathBox {
             return true;
         }
 
-        if (obj == null || obj.getClass() != this.getClass()) {
+        if (obj == null || obj.getClass() != super.getClass()) {
             return false;
         }
 
         MathBox other = (MathBox) obj;
-        if (other.numbers.size() == this.numbers.size()) {
-            for (int i = 0; i < other.numbers.size(); i++) {
-                if (!other.numbers.get(i).equals(this.numbers.get(i))) {
+        if (other.objects.size() == super.objects.size()) {
+            for (int i = 0; i < other.objects.size(); i++) {
+                if (!other.objects.get(i).equals(super.objects.get(i))) {
                     return false;
                 }
             }
